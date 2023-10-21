@@ -65,10 +65,10 @@ void vec_mb_expand(void **pp_vec, size_t el_size);
 
 #define vec_at(v, i) ((v) + (i))
 
-#define vec_for_each(v, action)\
+#define vec_for_each(v, iter, body)\
   do {\
     size_t count = vec_count(v);\
-    for (size_t i = 0; i < count; ++i) action(i, (v)[i]);\
+    for (size_t iter = 0; iter < count; ++iter) body;\
   } while (0)
 
 #define vec_append(v1, v2)\
