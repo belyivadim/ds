@@ -53,6 +53,8 @@ typedef struct {
 
 void vec_mb_expand(void **pp_vec, size_t el_size);
 
+void vec_expand(void **pp_vec, size_t el_size);
+
 #define vec_push(v, e) \
   do {\
     vec_mb_expand((void**)&(v), sizeof(*(v)));\
