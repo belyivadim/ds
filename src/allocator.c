@@ -34,8 +34,8 @@ bool allocator_init(size_t size) {
 void allocator_finalize(void) {
 #ifdef ALLOCATOR_DUMP_MEMORY_ON_FINALIZE
   vsa_dump(gp_vsa, logf_trace, "VSA_ALLOCATOR");
-  logf_trace("ALLOCATOR", "Number of allocations/frees: %lu / %lu\n", 
-             g_number_of_allocs, g_number_of_frees);
+  logf_trace("ALLOCATOR", "Number of frees/allocations: %lu / %lu\n", 
+             g_number_of_frees, g_number_of_allocs);
 #endif // !ALLOCATOR_DUMP_MEMORY_ON_FINALIZE
   free(g_memory);
   g_memory = NULL;
@@ -73,7 +73,7 @@ void a_free(void *ptr) {
   assert(NULL != gp_vsa);
   vsa_free(ptr);
 #ifdef ALLOCATOR_DUMP_MEMORY_ON_FINALIZE
-  ++g_number_of_frees;
+  g_number_of_frees += ptr != NULL;
 #endif // !ALLOCATOR_DUMP_MEMORY_ON_FINALIZE
 }
 
